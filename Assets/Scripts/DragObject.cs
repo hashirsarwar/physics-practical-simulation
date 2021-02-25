@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public class DragObject : MonoBehaviour
 {
-    // This keeps record of the distance of the weight relative
-    // to the meter rod. 
-    private GameObject distanceTag;
     // The plane the object is currently being dragged on.
     private Plane dragPlane;
     // The difference between where the mouse is on the drag plane and 
@@ -15,7 +12,6 @@ public class DragObject : MonoBehaviour
 
     void Start() {
         myMainCamera = Camera.main; // Camera.main is expensive; cache it here.
-        distanceTag = GameObject.FindGameObjectWithTag("DistanceTag");
     }
 
     void OnMouseDown() {
@@ -42,7 +38,7 @@ public class DragObject : MonoBehaviour
         }
 
         transform.position = mPos;
-        // Update distance on the meter rod.
-        distanceTag.GetComponent<Text>().text = "Distance: " + transform.position.x;
+        // Update distance label on the weight.
+        this.gameObject.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>().text = "D = " + transform.position.x;
     }
 }
